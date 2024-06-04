@@ -58,8 +58,11 @@
             var textBox = document.getElementById("textBox");
             textBox.select();
             textBox.setSelectionRange(0, 99999); // For mobile devices
-            document.execCommand("copy");
-            alert("Copied the text: " + textBox.value);
+            navigator.clipboard.writeText(textBox.value).then(function() {
+                alert("Copied the text: " + textBox.value);
+            }, function(err) {
+                alert('Could not copy text: ', err);
+            });
         }
     </script>
 </body>
